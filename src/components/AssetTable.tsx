@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { AssetRecord } from '../types';
-import { OWNERS, CATEGORIES } from '../constants';
+import { CATEGORIES } from '../constants';
 
 interface Props {
     records: AssetRecord[];
@@ -89,18 +89,14 @@ export default function AssetTable({
                                 editingId === record.id && editData ? (
                                     <tr key={record.id} className="editing-row">
                                         <td>
-                                            <select
+                                            <input
+                                                type="text"
                                                 value={editData.owner}
                                                 onChange={(e) =>
                                                     setEditData({ ...editData, owner: e.target.value })
                                                 }
-                                            >
-                                                {OWNERS.map((o) => (
-                                                    <option key={o} value={o}>
-                                                        {o}
-                                                    </option>
-                                                ))}
-                                            </select>
+                                                placeholder="所有者"
+                                            />
                                         </td>
                                         <td>
                                             <select

@@ -28,7 +28,14 @@ export default function App() {
             <header className="app-header">
                 <div className="header-inner">
                     <h1 className="app-title">
-                        <span className="logo-icon">💰</span>
+                        <svg className="logo-icon-svg" width="32" height="32" viewBox="0 0 512 512" fill="none">
+                            <rect width="512" height="512" rx="96" fill="rgba(255,255,255,0.2)" />
+                            <polyline points="100,360 180,320 260,280 340,220 420,140"
+                                fill="none" stroke="white" strokeWidth="28" strokeLinecap="round" strokeLinejoin="round" />
+                            <circle cx="100" cy="360" r="12" fill="white" opacity="0.9" />
+                            <circle cx="260" cy="280" r="12" fill="white" opacity="0.9" />
+                            <circle cx="420" cy="140" r="12" fill="white" opacity="0.9" />
+                        </svg>
                         カケイアセット
                     </h1>
                     <p className="app-subtitle">家庭の資産を、ひと目で。</p>

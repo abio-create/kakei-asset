@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import TotalAssetCard from './TotalAssetCard';
 import LineChartPanel from './LineChartPanel';
 import PieChartPanel from './PieChartPanel';
-import { CATEGORY_COLORS, OWNER_COLORS } from '../constants';
+import { CATEGORY_COLORS, getOwnerColor } from '../constants';
 
 interface Props {
     latestTotal: number;
@@ -34,6 +34,15 @@ export default function Dashboard({
         [activeMonth, getBreakdownByCategory]
     );
 
+    const ownerColors = useMemo(() => {
+        const allOwners = ownerData.map((d) => d.name);
+        const map: Record<string, string> = {};
+        for (const owner of allOwners) {
+            map[owner] = getOwnerColor(owner, allOwners);
+        }
+        return map;
+    }, [ownerData]);
+
     return (
         <div className="dashboard">
             <TotalAssetCard total={latestTotal} yearMonth={latestYearMonth} />
@@ -61,7 +70,7 @@ export default function Dashboard({
                     <PieChartPanel
                         title="🏠 所有者別"
                         data={ownerData}
-                        colors={OWNER_COLORS}
+                        colors={ownerColors}
                     />
                     <PieChartPanel
                         title="📂 カテゴリ別"
@@ -73,3 +82,4 @@ export default function Dashboard({
         </div>
     );
 }
+

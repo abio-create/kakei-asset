@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react';
-import { OWNERS, CATEGORIES } from '../constants';
+import { CATEGORIES } from '../constants';
 import type { AssetRecord } from '../types';
 
 interface Props {
@@ -13,7 +13,7 @@ function getCurrentYearMonth(): string {
 
 export default function AssetForm({ onAdd }: Props) {
     const [yearMonth, setYearMonth] = useState(getCurrentYearMonth());
-    const [owner, setOwner] = useState<string>(OWNERS[0]);
+    const [owner, setOwner] = useState<string>('');
     const [category, setCategory] = useState<string>(CATEGORIES[0]);
     const [amount, setAmount] = useState('');
     const [showSuccess, setShowSuccess] = useState(false);
@@ -46,17 +46,14 @@ export default function AssetForm({ onAdd }: Props) {
 
                 <div className="form-group">
                     <label htmlFor="owner">所有者</label>
-                    <select
+                    <input
+                        type="text"
                         id="owner"
                         value={owner}
                         onChange={(e) => setOwner(e.target.value)}
-                    >
-                        {OWNERS.map((o) => (
-                            <option key={o} value={o}>
-                                {o}
-                            </option>
-                        ))}
-                    </select>
+                        placeholder="例: Aさん"
+                        required
+                    />
                 </div>
 
                 <div className="form-group">
