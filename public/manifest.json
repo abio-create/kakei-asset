@@ -1,0 +1,23 @@
+{
+    "name": "カケイアセット",
+    "short_name": "カケイアセット",
+    "description": "家庭の総資産と個別資産の推移を管理・可視化するアプリ",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#f0f4f8",
+    "theme_color": "#2563eb",
+    "icons": [
+        {
+            "src": "/icon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any"
+        },
+        {
+            "src": "/apple-touch-icon.png",
+            "sizes": "180x180",
+            "type": "image/png",
+            "purpose": "any"
+        }
+    ]
+}
