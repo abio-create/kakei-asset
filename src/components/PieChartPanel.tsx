@@ -3,7 +3,6 @@ import {
     Pie,
     Cell,
     Tooltip,
-    Legend,
     ResponsiveContainer,
 } from 'recharts';
 
@@ -46,20 +45,18 @@ export default function PieChartPanel({ title, data, colors }: Props) {
     return (
         <div className="chart-panel pie-panel">
             <h3 className="chart-title">{title}</h3>
-            <ResponsiveContainer width="100%" height={280}>
+            <ResponsiveContainer width="100%" height={240}>
                 <PieChart>
                     <Pie
                         data={data}
                         cx="50%"
                         cy="50%"
-                        innerRadius={55}
-                        outerRadius={95}
+                        innerRadius={45}
+                        outerRadius={80}
                         paddingAngle={3}
                         dataKey="value"
                         animationDuration={600}
-                        label={({ name, percent }) =>
-                            `${name} ${((percent ?? 0) * 100).toFixed(0)}%`
-                        }
+                        label={false}
                     >
                         {data.map((entry, index) => (
                             <Cell
@@ -80,11 +77,28 @@ export default function PieChartPanel({ title, data, colors }: Props) {
                             boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
                         }}
                     />
-                    <Legend
-                        wrapperStyle={{ fontSize: '13px' }}
-                    />
                 </PieChart>
             </ResponsiveContainer>
+            {/* カスタム凡例 — 名前・金額・割合をすべて表示 */}
+            <ul className="pie-legend">
+                {data.map((entry, index) => {
+                    const pct = ((entry.value / total) * 100).toFixed(1);
+                    return (
+                        <li key={entry.name} className="pie-legend-item">
+                            <span
+                                className="pie-legend-dot"
+                                style={{ background: getColor(entry.name, colors, index) }}
+                            />
+                            <span className="pie-legend-name">{entry.name}</span>
+                            <span className="pie-legend-value">
+                                ¥{entry.value.toLocaleString()}
+                            </span>
+                            <span className="pie-legend-pct">{pct}%</span>
+                        </li>
+                    );
+                })}
+            </ul>
         </div>
     );
 }
+
